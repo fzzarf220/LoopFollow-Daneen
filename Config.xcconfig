@@ -11,6 +11,6 @@
 
 name=Daneen
 
-unique_id = ${DEVELOPMENT_TEAM}.${name}
+unique_id = ${DEVELOPMENT_TEAM}-${name}
 
 PRODUCT_NAME=Loop Follow ${name}
