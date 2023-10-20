@@ -9,3 +9,6 @@
 //  Copyright © 2018 Perceptus.org. All rights reserved.
 //
 unique_id = ${DEVELOPMENT_TEAM}
+
+display_name = Daneen
+app_prefix = $(display_name)-
