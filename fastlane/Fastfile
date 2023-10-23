@@ -12,7 +12,7 @@
 
 default_platform(:ios)
 
-NAME = 'Daneen'
+NAME = 'Saffan'
 
 TEAMID = ENV["TEAMID"]
 APPID = "com.#{TEAMID}.#{NAME}.LoopFollow"
