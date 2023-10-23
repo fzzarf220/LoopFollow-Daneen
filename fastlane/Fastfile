@@ -12,7 +12,10 @@
 
 default_platform(:ios)
 
+NAME = 'Daneen'
+
 TEAMID = ENV["TEAMID"]
+APPID = "com.#{TEAMID}.#{NAME}.LoopFollow"
 GH_PAT = ENV["GH_PAT"]
 GITHUB_WORKSPACE = ENV["GITHUB_WORKSPACE"]
 GITHUB_REPOSITORY_OWNER = ENV["GITHUB_REPOSITORY_OWNER"]
@@ -40,7 +43,7 @@ platform :ios do
     )
 
     previous_build_number = latest_testflight_build_number(
-      app_identifier: "com.#{TEAMID}.LoopFollow",
+      app_identifier: "#{APPID}",
       api_key: api_key,
     )
 
@@ -55,12 +58,12 @@ platform :ios do
       type: "appstore",
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
       app_identifier: [
-        "com.#{TEAMID}.LoopFollow"
+        "#{APPID}"
       ]
     )
 
     previous_build_number = latest_testflight_build_number(
-      app_identifier: "com.#{TEAMID}.LoopFollow",
+      app_identifier: "#{APPID}",
       api_key: api_key,
     )
 
@@ -77,7 +80,7 @@ platform :ios do
 
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/LoopFollow.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.LoopFollow"],
+      profile_name: mapping["#{APPID}"],
       code_sign_identity: "iPhone Distribution",
       targets: ["LoopFollow"]
     )
@@ -131,7 +134,7 @@ platform :ios do
       }
     end
 
-    configure_bundle_id("LoopFollow", "com.#{TEAMID}.LoopFollow", [
+    configure_bundle_id("LoopFollow", "#{APPID}", [
     ])
     
   end
@@ -152,7 +155,7 @@ platform :ios do
       force: true,
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
       app_identifier: [
-        "com.#{TEAMID}.LoopFollow",
+        "#{APPID}",
       ]
     )
   end
