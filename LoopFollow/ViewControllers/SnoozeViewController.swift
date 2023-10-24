@@ -90,9 +90,9 @@ class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
 
         if alertLabelVal == "none" { return }
 
-        PersonAlertLabel.text = person + " - " + alertLabelVal
+        let personAlertLabel: String = person + " - " + alertLabelVal
         
-        sendNotification(self, bgVal: bgVal, directionVal: directionVal, deltaVal: deltaVal, minAgoVal: minAgoVal, alertLabelVal: alertLabelVal)
+        sendNotification(self, bgVal: bgVal, directionVal: directionVal, deltaVal: deltaVal, minAgoVal: minAgoVal, alertLabelVal: personAlertLabel)
     }
     
     func sendNotification(_ sender: Any, bgVal: String, directionVal: String, deltaVal: String, minAgoVal: String, alertLabelVal: String) {
