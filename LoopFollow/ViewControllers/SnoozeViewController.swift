@@ -81,17 +81,17 @@ class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
         guard let infoDictionary: [String: Any] = Bundle.main.infoDictionary else { return }
         guard let person: String = infoDictionary["person"] as? String else { return }
         
+        let personAlertLabel: String = person + " - " + alertLabelVal
+
         loadViewIfNeeded()
         BGLabel.text = bgVal
         DirectionLabel.text = directionVal
         DeltaLabel.text = deltaVal
         MinAgoLabel.text = minAgoVal
-        AlertLabel.text = alertLabelVal + "\n" + person
+        AlertLabel.text = personAlertLabel
 
         if alertLabelVal == "none" { return }
 
-        let personAlertLabel: String = person + " - " + alertLabelVal
-        
         sendNotification(self, bgVal: bgVal, directionVal: directionVal, deltaVal: deltaVal, minAgoVal: minAgoVal, alertLabelVal: personAlertLabel)
     }
     

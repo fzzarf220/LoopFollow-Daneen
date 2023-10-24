@@ -12,5 +12,3 @@
 person = Daneen
 
 unique_id = ${DEVELOPMENT_TEAM}.${person}
-
-PRODUCT_NAME=Loop Follow ${person}
