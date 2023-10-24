@@ -9,6 +9,6 @@
 //  Copyright © 2018 Perceptus.org. All rights reserved.
 //
 
-name = Saffan
+person = Saffan
 
 unique_id = ${DEVELOPMENT_TEAM}.${person}
