@@ -9,12 +9,6 @@
 import UIKit
 import UserNotifications
 
-//enum Environment {
-//  @XCConfigValue(key: "person")
-//  static var person: String
-//}
-
-
 class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var appStateController: AppStateController?
     var snoozeTabItem: UITabBarItem = UITabBarItem()
