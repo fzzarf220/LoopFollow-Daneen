@@ -9,6 +9,11 @@
 import UIKit
 import UserNotifications
 
+enum Environment {
+  @XCConfigValue(key: "person")
+  static var person: String
+}
+
 
 class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
     var appStateController: AppStateController?
@@ -83,7 +88,7 @@ class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
         DirectionLabel.text = directionVal
         DeltaLabel.text = deltaVal
         MinAgoLabel.text = minAgoVal
-        AlertLabel.text = alertLabelVal
+        AlertLabel.text = alertLabelVal + "\n" + Environment.person
         if alertLabelVal == "none" { return }
         sendNotification(self, bgVal: bgVal, directionVal: directionVal, deltaVal: deltaVal, minAgoVal: minAgoVal, alertLabelVal: alertLabelVal)
     }
