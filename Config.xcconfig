@@ -9,7 +9,7 @@
 //  Copyright © 2018 Perceptus.org. All rights reserved.
 //
 
-person=Daneen
+person = Daneen
 
 unique_id = ${DEVELOPMENT_TEAM}.${person}
 

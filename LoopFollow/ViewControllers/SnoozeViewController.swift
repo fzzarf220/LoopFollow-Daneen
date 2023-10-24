@@ -9,10 +9,10 @@
 import UIKit
 import UserNotifications
 
-enum Environment {
-  @XCConfigValue(key: "person")
-  static var person: String
-}
+//enum Environment {
+//  @XCConfigValue(key: "person")
+//  static var person: String
+//}
 
 
 class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
@@ -34,6 +34,7 @@ class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var snoozeForMinuteLabel: UILabel!
     @IBOutlet weak var snoozeForMinuteStepper: UIStepper!
     @IBOutlet weak var debugTextView: UITextView!
+    
     
     @IBAction func SnoozeButton(_ sender: Any) {
         AlarmSound.stop()
@@ -83,13 +84,18 @@ class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     func updateDisplayWhenTriggered(bgVal: String, directionVal: String, deltaVal: String, minAgoVal: String, alertLabelVal: String){
+        guard let infoDictionary: [String: Any] = Bundle.main.infoDictionary else { return }
+        guard let person: String = infoDictionary["person"] as? String else { return }
+        
         loadViewIfNeeded()
         BGLabel.text = bgVal
         DirectionLabel.text = directionVal
         DeltaLabel.text = deltaVal
         MinAgoLabel.text = minAgoVal
-        AlertLabel.text = alertLabelVal + "\n" + Environment.person
+        AlertLabel.text = alertLabelVal + "\n" + person
+
         if alertLabelVal == "none" { return }
+
         sendNotification(self, bgVal: bgVal, directionVal: directionVal, deltaVal: deltaVal, minAgoVal: minAgoVal, alertLabelVal: alertLabelVal)
     }
     
