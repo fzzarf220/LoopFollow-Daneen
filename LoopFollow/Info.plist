@@ -17,15 +17,17 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CBBundleDisplayName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>${person} $(PRODUCT_NAME)</string>
+	<key>CFBundleDisplayName</key>
+	<string>${person} $(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>2.0.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>person</key>
+	<string>${person}</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.medical</string>
 	<key>LSRequiresIPhoneOS</key>
