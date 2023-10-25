@@ -82,6 +82,7 @@ class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
         guard let person: String = infoDictionary["person"] as? String else { return }
         
         let personAlertLabel: String = person + "\n" + alertLabelVal
+        let notificationLabel: String = persion + " - " + alertLabelVal
 
         loadViewIfNeeded()
         BGLabel.text = bgVal
@@ -92,7 +93,7 @@ class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
 
         if alertLabelVal == "none" { return }
 
-        sendNotification(self, bgVal: bgVal, directionVal: directionVal, deltaVal: deltaVal, minAgoVal: minAgoVal, alertLabelVal: personAlertLabel)
+        sendNotification(self, bgVal: bgVal, directionVal: directionVal, deltaVal: deltaVal, minAgoVal: minAgoVal, alertLabelVal: notificationLabel)
     }
     
     func sendNotification(_ sender: Any, bgVal: String, directionVal: String, deltaVal: String, minAgoVal: String, alertLabelVal: String) {
