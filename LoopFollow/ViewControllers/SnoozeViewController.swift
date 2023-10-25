@@ -81,7 +81,7 @@ class SnoozeViewController: UIViewController, UNUserNotificationCenterDelegate {
         guard let infoDictionary: [String: Any] = Bundle.main.infoDictionary else { return }
         guard let person: String = infoDictionary["person"] as? String else { return }
         
-        let personAlertLabel: String = person + " - " + alertLabelVal
+        let personAlertLabel: String = person + "\n" + alertLabelVal
 
         loadViewIfNeeded()
         BGLabel.text = bgVal
