@@ -6,8 +6,11 @@ import SwiftUI
 
 struct CardView: View {
     let followCard: FollowCard
+    let actionSettingsPage: () -> Void
+    let actionMainPage: () -> Void
+
     var body: some View {
-        Button(action: { print("card pressed!") }) {
+        Button(action: self.actionMainPage) {
             VStack(alignment: .leading) {
                 HStack() {
                     Circle()
@@ -24,7 +27,7 @@ struct CardView: View {
                         
                     }
                     Spacer()
-                    Button(action: {print("settings pressed!")}, label: {
+                    Button(action: self.actionSettingsPage, label: {
                         Image(systemName: "gearshape.fill")
                             .padding()
                             .frame(width: 30, height: 30, alignment: .center)
@@ -44,7 +47,7 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(followCard: FollowCard.sampleData[0])
+    CardView(followCard: FollowCard.sampleData[0], actionSettingsPage: {print("SETTINGS!!")}, actionMainPage: {print("MAIN!!")})
 }
 
 

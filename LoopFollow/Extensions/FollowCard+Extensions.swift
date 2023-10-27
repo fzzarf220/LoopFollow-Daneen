@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct FollowCard: Identifiable {
+struct FollowCard: Hashable, Identifiable {
     let id: UUID
     var name: String
     var bg: Int

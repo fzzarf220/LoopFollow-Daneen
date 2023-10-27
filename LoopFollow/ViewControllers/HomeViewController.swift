@@ -6,49 +6,32 @@
 //  Copyright © 2023 Jon Fawcett. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import SwiftUI
 
-struct HomeViewController: View {
-    let followCards: [FollowCard]
+class HomeViewController: UIViewController {
+    @IBOutlet weak var theContainer: UIView!
 
-    var body: some View {
-        NavigationStack {
-            VStack(alignment:.trailing) {
-                List(followCards) {
-                    followCard in CardView(followCard: followCard)
-                        .listRowBackground(followCard.theme.mainColor)
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Button(action: {}, label: {
-                        Text("Add new person")
-                    })
-                }
-            }
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        let childView = UIHostingController(rootView: HomeSwiftUIViewController(followCards: FollowCard.sampleData))
+        
+        addChild(childView)
+        childView.view.frame = theContainer.bounds
+        theContainer.addSubview(childView.view)
     }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }
-
-#Preview {
-    HomeViewController(followCards: FollowCard.sampleData)
-}
-
-
-//
-//class debugViewController: UIViewController {
-//  
-//    
-//    var appStateController: AppStateController?
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//    }
-//    
-//    
-//    
-//    
-//}
