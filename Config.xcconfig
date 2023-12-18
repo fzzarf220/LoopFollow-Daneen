@@ -12,3 +12,5 @@
 person = Daneen
 
 unique_id = ${DEVELOPMENT_TEAM}.${person}
+display_name = ${person}
+app_prefix = 
