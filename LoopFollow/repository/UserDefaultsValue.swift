@@ -18,8 +18,6 @@ protocol UserDefaultsAnyValue {
 ///
 /// Another feature of this class is that when the value changes, the change can be observed by multiple observers. There are two observation levels: the instance level, when the observers register directly to the UserDefaultsValue instance, and group level, if the UserDefaultsValue instance is embeded in a group (UserDefaultsValueGroups class manages the groups). It is very convenient to declare related values in the same group, so when one of them changes, the group observers are notified that a change occured in that group (no need to observe each particular UserDefaultsValue instance).
 class UserDefaultsValue<T: AnyConvertible & Equatable> : UserDefaultsAnyValue {
-    
-    
     // user defaults key (UserDefaultsAnyValue protocol implementation)
     let key: String
     
@@ -85,7 +83,7 @@ class UserDefaultsValue<T: AnyConvertible & Equatable> : UserDefaultsAnyValue {
     
     // value change observers
     private var observers: [UUID : (T) -> Void] = [:]
-    
+        
     // user defaults used for persistence
     private class var defaults: UserDefaults {
         return UserDefaults(suiteName: AppConstants.APP_GROUP_ID)!
@@ -93,6 +91,7 @@ class UserDefaultsValue<T: AnyConvertible & Equatable> : UserDefaultsAnyValue {
     
     init(key: String, default defaultValue: T, onChange: ((T) -> Void)? = nil, validation: ((T) -> T?)? = nil) {
         self.key = key
+
         if let anyValue = UserDefaultsValue.defaults.object(forKey: key), let value = T.fromAny(anyValue) as T? {
             if let validation = validation {
                 self.value = validation(value) ?? defaultValue
@@ -102,6 +101,7 @@ class UserDefaultsValue<T: AnyConvertible & Equatable> : UserDefaultsAnyValue {
         } else {
             self.value = defaultValue
         }
+        
         self.onChange = onChange
         self.validation = validation
     }

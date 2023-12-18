@@ -11,16 +11,35 @@ import SwiftUI
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var theContainer: UIView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.initView(uiView: theContainer)
+        
+//        UserProfiles.bind { [weak self] _ in
+//            DispatchQueue.main.async {
+//                // refresh view on data
+//                print("\nHomeViewController: refresh view on data change <-------------------------------")
+//                self?.theContainer.layoutIfNeeded()
+//            }
+//        }
+    }
+    
+    private func initView(uiView: UIView) {
+//        let userCards: Array<UserCard> = UserProfiles.getAll()
+//            .map {
+//
+//                return UserCard(id: $0.id, name: $0.name, bg: 120, color: Color.red)
+//            }
+        
+        print("Displaying the view")
 
-        // Do any additional setup after loading the view.
-        let childView = UIHostingController(rootView: HomeSwiftUIViewController(followCards: FollowCard.sampleData))
+//        let childView = UIHostingController(rootView: HomeSwiftUIViewController(userCards: userCards))
+        let childView = UIHostingController(rootView: HomeSwiftUIViewController(userProfiles: .constant(UserProfilesStruct())))
         
         addChild(childView)
-        childView.view.frame = theContainer.bounds
-        theContainer.addSubview(childView.view)
+        childView.view.frame = uiView.bounds
+        uiView.addSubview(childView.view)
     }
     
 

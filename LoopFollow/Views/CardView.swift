@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct CardView: View {
-    let followCard: FollowCard
+    let followCard: UserCard
     let actionSettingsPage: () -> Void
     let actionMainPage: () -> Void
 
@@ -24,7 +24,6 @@ struct CardView: View {
                             .labelStyle(.titleAndIcon)
                             .font(.caption)
                             .opacity(followCard.hasAlerts ? 1 : 0)
-                        
                     }
                     Spacer()
                     Button(action: self.actionSettingsPage, label: {
@@ -41,13 +40,13 @@ struct CardView: View {
                 }
             }
             .padding()
-            .foregroundColor(followCard.theme.accentColor)
+//            .foregroundColor(userCard.theme.accentColor)
         }
     }
 }
 
 #Preview {
-    CardView(followCard: FollowCard.sampleData[0], actionSettingsPage: {print("SETTINGS!!")}, actionMainPage: {print("MAIN!!")})
+    CardView(followCard: UserCard.sampleData[0], actionSettingsPage: {print("SETTINGS!!")}, actionMainPage: {print("MAIN!!")})
 }
 
 
