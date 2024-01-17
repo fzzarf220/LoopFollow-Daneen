@@ -1,16 +1,11 @@
 #include? "LoopFollowConfigOverride.xcconfig"
 #include? "../../LoopFollowConfigOverride.xcconfig"
-
-//
-//  Config.xcconfig
-//  nsapple
-//
-//  Created by Kenneth Stack on 4/12/18.
-//  Copyright © 2018 Perceptus.org. All rights reserved.
-//
+#include? "LoopFollowDisplayNameConfig.xcconfig"
+#include? "../../LoopFollowDisplayNameConfig.xcconfig"
 
 person = Daneen
+unique_id = ${DEVELOPMENT_TEAM}
 
-unique_id = ${DEVELOPMENT_TEAM}.${person}
-display_name = ${person}
-app_prefix = 
+//Version (DEFAULT)
+LOOP_FOLLOW_MARKETING_VERSION = 2.1.3
+

@@ -203,8 +203,8 @@ extension MainViewController {
                         latestIOB = String(format:"%.2f", (iobdata["iob"] as! Double))
                     }
                     if let cobdata = lastLoopRecord["enacted"] as? [String:AnyObject] {
-                        tableData[1].value = String(format:"%.1f", cobdata["COB"] as! Double)
-                        latestCOB = String(format:"%.1f", cobdata["COB"] as! Double)
+                        tableData[1].value = String(format:"%.0f", cobdata["COB"] as! Double)
+                        latestCOB = String(format:"%.0f", cobdata["COB"] as! Double)
                     }
                     if let recbolusdata = lastLoopRecord["enacted"] as? [String:AnyObject] {
                         tableData[8].value = String(format:"%.2fU", recbolusdata["insulinReq"] as! Double)
@@ -219,60 +219,64 @@ extension MainViewController {
                     var graphtype = ""
                     var predictioncolor = UIColor.systemGray
                     PredictionLabel.textColor = predictioncolor
-                    if let enactdata = lastLoopRecord["enacted"] as? [String:AnyObject] {
-                        if let predbgdata = enactdata["predBGs"] as? [String:AnyObject] {
-                            if predbgdata["COB"] != nil {
-                                graphtype="COB"
-                                predictioncolor = UIColor.systemYellow
-                                PredictionLabel.textColor = predictioncolor
-                            }
-                            else if predbgdata["UAM"] != nil {
-                                graphtype="UAM"
-                                predictioncolor = UIColor.systemOrange
-                                PredictionLabel.textColor = predictioncolor
-                            }
-                            else if predbgdata["IOB"] != nil {
-                                graphtype="IOB"
-                                predictioncolor = UIColor.systemBlue
-                                PredictionLabel.textColor = predictioncolor
-                            }
-                            else {
-                                graphtype="ZT"
-                                predictioncolor = UIColor.systemGreen
-                                PredictionLabel.textColor = predictioncolor
-                            }
-                            
-                            let graphdata = predbgdata[graphtype] as! [Double]
-                            
-                            if let eventualdata = lastLoopRecord["enacted"] as? [String:AnyObject] {
-                                if let eventualBGValue = eventualdata["eventualBG"] as? NSNumber {
-                                    let eventualBGStringValue = String(describing: eventualBGValue)
-                                    PredictionLabel.text = bgUnits.toDisplayUnits(eventualBGStringValue)
-                                }
-                            }
-                            
-                            if UserDefaultsRepository.downloadPrediction.value && latestLoopTime < lastLoopTime {
-                                predictionData.removeAll()
-                                var predictionTime = lastLoopTime
-                                let toLoad = Int(UserDefaultsRepository.predictionToLoad.value * 12)
-                                var i = 0
-                                while i <= toLoad {
-                                    if i < graphdata.count {
-                                        let prediction = ShareGlucoseData(sgv: Int(round(graphdata[i])), date: predictionTime, direction: "flat")
-                                        predictionData.append(prediction)
-                                        predictionTime += 300
-                                    }
-                                    i += 1
-                                }
-                                
-                            }
-                            
-                            let predMin = graphdata.min()
-                            let predMax = graphdata.max()
-                            tableData[9].value = bgUnits.toDisplayUnits(String(predMin!)) + "/" + bgUnits.toDisplayUnits(String(predMax!))
-                            
-                            updatePredictionGraph(color: predictioncolor)
+
+                    if let enactdata = lastLoopRecord["enacted"] as? [String:AnyObject],
+                       let predbgdata = enactdata["predBGs"] as? [String:AnyObject] {
+
+                        if predbgdata["COB"] != nil {
+                            graphtype = "COB"
+                        } else if predbgdata["UAM"] != nil {
+                            graphtype = "UAM"
+                        } else if predbgdata["IOB"] != nil {
+                            graphtype = "IOB"
+                        } else {
+                            graphtype = "ZT"
                         }
+
+                        // Access the color based on graphtype
+                        var colorName = ""
+                        switch graphtype {
+                        case "COB": colorName = "LoopYellow"
+                        case "UAM": colorName = "UAM"
+                        case "IOB": colorName = "Insulin"
+                        case "ZT": colorName = "ZT"
+                        default: break
+                        }
+
+                        if let selectedColor = UIColor(named: colorName) {
+                            predictioncolor = selectedColor
+                            PredictionLabel.textColor = predictioncolor
+                        }
+
+                        let graphdata = predbgdata[graphtype] as! [Double]
+
+                        if let eventualdata = lastLoopRecord["enacted"] as? [String:AnyObject] {
+                            if let eventualBGValue = eventualdata["eventualBG"] as? NSNumber {
+                                let eventualBGStringValue = String(describing: eventualBGValue)
+                                PredictionLabel.text = bgUnits.toDisplayUnits(eventualBGStringValue)
+                            }
+                        }
+
+                        if UserDefaultsRepository.downloadPrediction.value && latestLoopTime < lastLoopTime {
+                            predictionData.removeAll()
+                            var predictionTime = lastLoopTime
+                            let toLoad = Int(UserDefaultsRepository.predictionToLoad.value * 12)
+                            var i = 0
+                            while i <= toLoad {
+                                if i < graphdata.count {
+                                    let prediction = ShareGlucoseData(sgv: Int(round(graphdata[i])), date: predictionTime, direction: "flat")
+                                    predictionData.append(prediction)
+                                    predictionTime += 300
+                                }
+                                i += 1
+                            }
+                        }
+
+                        let predMin = graphdata.min()
+                        let predMax = graphdata.max()
+                        tableData[9].value = bgUnits.toDisplayUnits(String(predMin!)) + "/" + bgUnits.toDisplayUnits(String(predMax!))
+
+                        updatePredictionGraph(color: predictioncolor)
                     }
                     
                     if let loopStatus = lastLoopRecord["recommendedTempBasal"] as? [String:AnyObject] {
