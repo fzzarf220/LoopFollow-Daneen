@@ -12,10 +12,10 @@
 
 default_platform(:ios)
 
-NAME = 'Saffan'
+PERSON = "Saffan"
 
 TEAMID = ENV["TEAMID"]
-APPID = "com.#{TEAMID}.#{NAME}.LoopFollow"
+APPID = "com.#{TEAMID}.#{PERSON}.LoopFollow"
 GH_PAT = ENV["GH_PAT"]
 GITHUB_WORKSPACE = ENV["GITHUB_WORKSPACE"]
 GITHUB_REPOSITORY_OWNER = ENV["GITHUB_REPOSITORY_OWNER"]
