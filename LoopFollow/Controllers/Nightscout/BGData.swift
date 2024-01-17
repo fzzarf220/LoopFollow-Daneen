@@ -139,6 +139,9 @@ extension MainViewController {
         
         let graphHours = 24 * UserDefaultsRepository.downloadDays.value
         
+        if data.count == 0 {
+            return
+        }
         let pullDate = data[data.count - 1].date
         let latestDate = data[0].date
         let now = dateTimeUtils.getNowTimeIntervalUTC()
@@ -201,6 +204,14 @@ extension MainViewController {
         viewUpdateNSBG(sourceName: sourceName)
     }
     
+    func updateServerText(with serverText: String? = nil) {
+        if UserDefaultsRepository.showDisplayName.value, let displayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
+            self.serverText.text = displayName
+        } else if let serverText = serverText {
+            self.serverText.text = serverText
+        }
+    }
+    
     // NS BG Data Front end updater
     func viewUpdateNSBG (sourceName: String) {
         DispatchQueue.main.async {
@@ -209,7 +220,7 @@ extension MainViewController {
                 self.writeDebugLog(value: "Num BG: " + self.bgData.count.description)
             }
             let entries = self.bgData
-            if entries.count < 1 { return }
+            if entries.count < 2 { return } // protect index out of bounds
             
             self.updateBGGraph()
             self.updateStats()
@@ -226,7 +237,7 @@ extension MainViewController {
                 userUnit = " mmol/L"
             }
             
-            self.serverText.text = sourceName
+            self.updateServerText(with: sourceName)
             
             var snoozerBG = ""
             var snoozerDirection = ""

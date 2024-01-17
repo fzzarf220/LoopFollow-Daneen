@@ -5,17 +5,17 @@
 	<key>CFBundleDisplayName</key>
 	<string>$(display_name)</string>
 	<key>AppGroupIdentifier</key>
-	<string>group.com.$(unique_id).$(app_prefix)LoopFollow</string>
+	<string>group.com.$(unique_id).LoopFollow$(app_suffix)</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>com.$(unique_id).$(app_prefix)LoopFollow</string>
+		<string>com.$(unique_id).LoopFollow$(app_suffix)</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.$(unique_id).$(app_prefix)LoopFollow</string>
+	<string>com.$(unique_id).LoopFollow$(app_suffix)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -25,7 +25,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.0</string>
+	<string>$(LOOP_FOLLOW_MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>person</key>
