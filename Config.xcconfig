@@ -7,4 +7,4 @@ person = Daneen
 unique_id = ${DEVELOPMENT_TEAM}.${person}
 
 //Version (DEFAULT)
-LOOP_FOLLOW_MARKETING_VERSION = 2.2.7
+LOOP_FOLLOW_MARKETING_VERSION = 2.2.8
